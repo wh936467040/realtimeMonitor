@@ -168,18 +168,22 @@ void * getTableUseRatio()
 			}
 			if((*it2) ->pkMemAllocType ==3 && (*it2) -> useRatio > 100 )
 			{
+				// used in version 4.2.1
+				// remove after 4.2.2
+				/*
 				struct ALARM_INFO_D5000 alarmInfo;
 				alarmInfo.itemid="00020015";
 				alarmInfo.data= "实时库表空间使用率超过100%,将影响插入和更新的效率: " + (*it2)->appName+"."+(*it2)->tableName+" 使用率 : "+f2tos((*it2)->useRatio);
 				cout<<"告警内容"<<alarmInfo.data<<endl;
 				sendAlarm.sendD5000AlarmInfo(conf->nodeId,statTime, alarmInfo);
 				insertTableIntoAlarmSet((*it2)->appName,(*it2)->tableName,statTime,alarmInfo.data);
+				*/
 			}
 			else if((*it2) ->pkMemAllocType !=3)
 			{
 				struct ALARM_INFO_D5000 alarmInfo;
 				alarmInfo.itemid="00020015";
-	     			alarmInfo.data= "实时库表空间使用率过高, 将无法写入数据:" + (*it2)->appName+"."+(*it2)->tableName+" 使用率 : "+f2tos((*it2)->useRatio);
+				alarmInfo.data= "实时库表空间使用率过高, 将无法写入数据:" + (*it2)->appName+"."+(*it2)->tableName+" 使用率 : "+f2tos((*it2)->useRatio);
 				cout<<"告警内容"<<alarmInfo.data<<endl;
 				sendAlarm.sendD5000AlarmInfo(conf->nodeId,statTime, alarmInfo);
 				insertTableIntoAlarmSet((*it2)->appName,(*it2)->tableName,statTime,alarmInfo.data);
